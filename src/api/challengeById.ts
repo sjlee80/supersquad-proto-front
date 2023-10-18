@@ -1,5 +1,5 @@
-import axios from "axios";
-import dotenv from "dotenv";
+import axios from 'axios';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ export const getChallengeInfo = async (challengeId: string) => {
     //     Cookie: `cookie-session=${cookieSession}`,
     //   },
     // });
-    const response = await axios.get(url);
+    const response = await axios.get(url, { withCredentials: true });
 
     if (response.status === 200) {
       return response.data.challengeInfo;
