@@ -1,40 +1,37 @@
-import styled from "styled-components";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import dotenv from "dotenv";
-import { useRecoilState } from "recoil";
-import { isSignedInState } from "../../src/lib/states";
-import Image from "next/image";
-import dynamic from "next/dynamic";
+import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import dotenv from 'dotenv';
+import { useRecoilState } from 'recoil';
+import { isSignedInState } from '../../src/lib/states';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
 
 dotenv.config();
 
 const GOOGLE_LOGIN_URL = process.env.GOOGLE_LOGIN_URL;
-
 
 export default function Login() {
   const router = useRouter();
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') { 
+    if (typeof window !== 'undefined') {
       setIsMounted(true);
     }
-  }, [])
+  }, []);
 
   return (
     <>
       {isMounted && (
         <Container>
-        
-        <SignUpNSignInWithGoogle>Sign Up & Sign In</SignUpNSignInWithGoogle>
-        <GoogleSignIn />
+          <SignUpNSignInWithGoogle>Sign Up & Sign In</SignUpNSignInWithGoogle>
+          <GoogleSignIn />
         </Container>
       )}
-
     </>
   );
-} 
+}
 
 const Container = styled.div`
   /* @media (max-width: 2160px) {
@@ -80,12 +77,15 @@ const GoogleSignIn: React.FC = () => {
   const [isSignedIn, setIsSignedIn] = useRecoilState(isSignedInState);
   const [isMounted, setIsMounted] = useState<boolean>(false);
   useEffect(() => {
-    if (typeof window !== 'undefined') { 
+    if (typeof window !== 'undefined') {
       setIsMounted(true);
     }
-  }, [])
+  }, []);
+
   return (
-    <> {isMounted && (
+    <>
+      {' '}
+      {isMounted && (
         <GoogleButtonWrapper>
           <Image
             src="/pages/flow/connectwallet/btn_google_signin_light_normal_web@2x.png"
@@ -95,12 +95,12 @@ const GoogleSignIn: React.FC = () => {
             onClick={() => {
               setIsSignedIn(true);
               console.log(isSignedIn);
-              console.log("안녕");
+              console.log('안녕');
               window.location.href = GOOGLE_LOGIN_URL!; // 외부 URL로 이동
             }}
           />
-      </GoogleButtonWrapper>
-    )}
+        </GoogleButtonWrapper>
+      )}
     </>
   );
 };

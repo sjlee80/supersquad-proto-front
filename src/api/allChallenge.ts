@@ -1,5 +1,5 @@
-import axios from "axios";
-import dotenv from "dotenv";
+import axios from 'axios';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -15,7 +15,12 @@ const getAllChallenges = async (token: string) => {
     // };
 
     // const response = await api.get("/challenge", config); // api 인스턴스 사용
-    const response = await axios.get(`${API_BASE_URL}/challenge`); // api 인스턴스 사용
+    const response = await axios.get(`${API_BASE_URL}/challenge`, {
+      headers: {
+        // Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true, // 쿠키를 요청에 포함시킵니다.
+    });
 
     if (response.status === 200) {
       return response.data.challenges;
